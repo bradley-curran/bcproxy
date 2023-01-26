@@ -1,0 +1,11 @@
+{
+  "proxyPort": 8081,
+  "target": "http://localhost:8080",
+  "request": [
+    {
+      "action": "setHeader",
+      "key": "X-Is-Dog-Person",
+      "value": "true"
+    }
+  ]
+}

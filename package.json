@@ -1,0 +1,22 @@
+{
+  "name": "bcproxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec './build.sh && node --enable-source-maps .'",
+    "build": "./build.sh"
+  },
+  "bin": {
+    "bcproxy": "./index.js"
+  },
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.1",
+    "esbuild": "^0.15.7",
+    "nodemon": "^2.0.18",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
+}

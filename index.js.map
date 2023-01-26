@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/index.ts"],
+  "sourcesContent": ["#!/usr/bin/env node --enable-source-maps\n\nimport { readFileSync } from \"fs\";\n\nconst http = require(\"http\");\nconst httpProxy = require(\"http-proxy\");\n\nconst configText = readFileSync(\"./bcproxy.json\").toString();\nconst config = JSON.parse(configText);\n\nconst proxy = httpProxy.createProxyServer({});\n\nif (config.request) {\n  proxy.on(\"proxyReq\", (proxyReq: any) => {\n    config.request.forEach((action: any) => {\n      if (action.action === \"setHeader\") {\n        proxyReq.setHeader(action.key, action.value);\n      }\n    });\n  });\n}\n\nconst server = http.createServer((req: any, res: any) => {\n  proxy.web(req, res, { target: config.target });\n});\n\nconsole.log(`listening on port ${config.proxyPort}`);\nserver.listen(config.proxyPort);\n"],
+  "mappings": ";aAEA,IAAAA,EAA6B,cAEvBC,EAAO,QAAQ,QACfC,EAAY,QAAQ,sCAEpBC,KAAa,gBAAa,gBAAgB,EAAE,SAAS,EACrDC,EAAS,KAAK,MAAMD,CAAU,EAE9BE,EAAQH,EAAU,kBAAkB,CAAC,CAAC,EAExCE,EAAO,SACTC,EAAM,GAAG,WAAaC,GAAkB,CACtCF,EAAO,QAAQ,QAASG,GAAgB,CAClCA,EAAO,SAAW,aACpBD,EAAS,UAAUC,EAAO,IAAKA,EAAO,KAAK,CAE/C,CAAC,CACH,CAAC,EAGH,IAAMC,EAASP,EAAK,aAAa,CAACQ,EAAUC,IAAa,CACvDL,EAAM,IAAII,EAAKC,EAAK,CAAE,OAAQN,EAAO,MAAO,CAAC,CAC/C,CAAC,EAED,QAAQ,IAAI,qBAAqBA,EAAO,WAAW,EACnDI,EAAO,OAAOJ,EAAO,SAAS",
+  "names": ["import_fs", "http", "httpProxy", "configText", "config", "proxy", "proxyReq", "action", "server", "req", "res"]
+}
